@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <link type="image/x-icon" href="/img/favicon.svg" rel="shortcut icon">
+    <link type="Image/x-icon" href="/img/favicon.svg" rel="icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+    <title>Главная</title>
+</head>
+
+<body>
+    <div class="main-container">
+        <header class="header">
+            <nav class="menu">
+                <div class="menu-item active">
+                    <a href="/main">
+                        <div class="menu-icon">⌂</div>
+                        <span>Главная</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="/contract">
+                        <div class="menu-icon">📄</div>
+                        <span>Договоры</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="/search">
+                        <div class="menu-icon">🔍</div>
+                        <span>Поиск</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="/server">
+                        <div class="menu-icon">⚙️</div>
+                        <span>Сервер</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="/user">
+                        <div class="menu-icon">👤</div>
+                        <span>{{username}}</span>
+                    </a>
+                </div>
+            </nav>
+        </header>
+
+        <main class="content">
+            <div class="main-grid">
+                <section class="notifications-section">
+                    <div class="section-header">
+                        <div class="header-icon">📋</div>
+                        <h2>Уведомления</h2>
+                    </div>
+                    {{#if notifications.length}}
+                    {{#each notifications}}
+                    <div class="notification-card">
+                        <div class="notification-icon">
+                            {{#if (eq importance "ВАЖНО!")}}⚠️{{else}}ℹ️{{/if}}
+                        </div>
+                        <div class="notification-content">
+                            <span class="notification-type {{importanceClass importance}}">{{importance}}</span>
+                            <p class="notification-text">{{content}}</p>
+                            <span class="notification-time">{{formatDate date}}</span>
+                        </div>
+                    </div>
+                    {{/each}}
+                    {{else}}
+                    <div class="empty-state">
+                        <p>Уведомлений нет</p>
+                    </div>
+                    {{/if}}
+                </section>
+
+                <section class="summary-section">
+                    <div class="section-header">
+                        <div class="header-icon">📊</div>
+                        <h2>Сводка</h2>
+                    </div>
+                    <div class="summary-cards">
+                        <div class="summary-card">
+                            <div class="card-icon">✅</div>
+                            <div class="card-content">
+                                <p>Активные договоры</p>
+                                <strong>{{active_users}}</strong>
+                            </div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="card-icon">⏸️</div>
+                            <div class="card-content">
+                                <p>Приостановленные</p>
+                                <strong>{{passive_users}}</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="network-section">
+                        <div class="section-header">
+                            <div class="header-icon">🌐</div>
+                            <h2>Состояние сетей</h2>
+                        </div>
+                        <div class="network-grid">
+                            <div class="network-card">
+                                <p class="network-name">Коломна</p>
+                                <p class="network-status">отличное</p>
+                                <p class="network-signal">100%</p>
+                            </div>
+                            <div class="network-card">
+                                <p class="network-name">Озеры</p>
+                                <p class="network-status">нормальное</p>
+                                <p class="network-signal">75%</p>
+                            </div>
+                            <div class="network-card">
+                                <p class="network-name">Луховицы</p>
+                                <p class="network-status">нормальное</p>
+                                <p class="network-signal">87%</p>
+                            </div>
+                            <div class="network-card">
+                                <p class="network-name">Зарайск</p>
+                                <p class="network-status">отличное</p>
+                                <p class="network-signal">94%</p>
+                            </div>
+                        </div>
+                        <a href="/server?section=2" class="action-button">Подробнее</a>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

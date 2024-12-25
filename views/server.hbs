@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <link type="image/x-icon" href="/img/favicon.svg" rel="shortcut icon">
+    <link type="Image/x-icon" href="/img/favicon.svg" rel="icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+    <title>Сервер</title>
+</head>
+
+<body>
+    <div class="main-container">
+        <header class="header">
+            <nav class="menu">
+                <div class="menu-item">
+                    <a href="/main">
+                        <div class="menu-icon">⌂</div>
+                        <span>Главная</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="/contract">
+                        <div class="menu-icon">📄</div>
+                        <span>Договоры</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="/search">
+                        <div class="menu-icon">🔍</div>
+                        <span>Поиск</span>
+                    </a>
+                </div>
+                <div class="menu-item active">
+                    <a href="/server">
+                        <div class="menu-icon">⚙️</div>
+                        <span>Сервер</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="/user">
+                        <div class="menu-icon">👤</div>
+                        <span>{{username}}</span>
+                    </a>
+                </div>
+            </nav>
+        </header>
+
+        <main class="content">
+            <div class="main-grid">
+                <section class="summary-section">
+                    <div class="section-header">
+                        <div class="header-icon">⚙️</div>
+                        <h2>Настройки сервера</h2>
+                    </div>
+                    <div class="navigation-cards">
+                        <a href="/server?section=1" 
+                           class="summary-card {{#if (eq activeSection '1')}}active{{/if}}">
+                            <div class="card-icon">📊</div>
+                            <div class="card-content">
+                                <p>Тарифные планы</p>
+                            </div>
+                        </a>
+                        <a href="/server?section=2" 
+                           class="summary-card {{#if (eq activeSection '2')}}active{{/if}}">
+                            <div class="card-icon">🌐</div>
+                            <div class="card-content">
+                                <p>Статус сетей</p>
+                            </div>
+                        </a>
+                    </div>
+                </section>
+
+                <section class="notifications-section">
+                    {{#if (eq activeSection '1')}}
+                    <div class="section-header">
+                        <div class="card-icon">📊</div>
+                        <h2>Управление тарифами</h2>
+                    </div>
+
+                    {{#if isManager}}
+                    <div class="form-card">
+                        <div class="section-header">
+                            <div class="card-icon">➕</div>
+                            <h2>Добавить тариф</h2>
+                        </div>
+                        <form method="POST" action="/create-tariff" class="tariff-form">
+                            <div class="tariff-field">
+                                <label class="search_label">Название</label>
+                                <input type="text" name="name" required class="search_input">
+                            </div>
+                            <div class="tariff-field">
+                                <label class="search_label">Лимит (ГБ)</label>
+                                <input type="number" name="limit_gb" min="0" class="search_input">
+                            </div>
+                            <div class="tariff-field">
+                                <label class="search_label">Скорость</label>
+                                <input type="number" name="speed" required class="search_input">
+                            </div>
+                            <div class="tariff-field">
+                                <label class="search_label">Цена</label>
+                                <input type="number" name="price" required class="search_input">
+                            </div>
+                            <button type="submit" class="action-button">Создать тариф</button>
+                        </form>
+                    </div>
+                    {{/if}}
+
+                    <div class="section-header" style="margin-top: 32px;">
+                        <div class="card-icon">📋</div>
+                        <h2>Список тарифов</h2>
+                    </div>
+
+                    <form method="POST" action="/change-tariff">
+                        <div class="tariffs-grid">
+                            {{#each tariffPlans}}
+                            <div class="tariff-card">
+                                <div class="tariff-field">
+                                    <label>Название</label>
+                                    <input type="text" name="name_{{this.id}}" value="{{this.name}}" class="tariff-input">
+                                </div>
+                                <div class="tariff-field">
+                                    <label>Лимит</label>
+                                    <input type="number" name="limit_gb_{{this.id}}" value="{{this.limit_gb}}" class="tariff-input" min="0">
+                                </div>
+                                <div class="tariff-field">
+                                    <label>Скорость</label>
+                                    <input type="number" name="speed_{{this.id}}" value="{{this.speed}}" class="tariff-input" min="0" required>
+                                </div>
+                                <div class="tariff-field">
+                                    <label>Цена</label>
+                                    <input type="number" name="price_{{this.id}}" value="{{this.price}}" class="tariff-input" min="0" required>
+                                </div>
+                            </div>
+                            {{/each}}
+                        </div>
+                        <button type="submit" class="action-button">Сохранить изменения</button>
+                    </form>
+                    {{/if}}
+
+                    {{#if (eq activeSection '2')}}
+                    <div class="section-header">
+                        <div class="card-icon">🌐</div>
+                        <h2>Мониторинг сетей</h2>
+                    </div>
+                    <div class="network-grid">
+                        <div class="network-card">
+                                <p class="network-name">Коломна</p>
+                                <p class="network-status">отличное</p>
+                                <p class="network-signal">100%</p>
+                            </div>
+                            <div class="network-card">
+                                <p class="network-name">Озеры</p>
+                                <p class="network-status">нормальное</p>
+                                <p class="network-signal">75%</p>
+                            </div>
+                            <div class="network-card">
+                                <p class="network-name">Луховицы</p>
+                                <p class="network-status">нормальное</p>
+                                <p class="network-signal">87%</p>
+                            </div>
+                            <div class="network-card">
+                                <p class="network-name">Зарайск</p>
+                                <p class="network-status">отличное</p>
+                                <p class="network-signal">94%</p>
+                            </div>
+                    </div>
+                    {{/if}}
+                </section>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

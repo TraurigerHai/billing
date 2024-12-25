@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <link type="image/x-icon" href="/img/favicon.svg" rel="shortcut icon">
+    <link type="Image/x-icon" href="/img/favicon.svg" rel="icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+    <title>Открыть</title>
+</head>
+
+<body>
+    <div class="main-container">
+        <header class="header">
+            <nav class="menu">
+                <div class="menu-item">
+                    <a href="/main">
+                        <div class="menu-icon">⌂</div>
+                        <span>Главная</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="/contract">
+                        <div class="menu-icon">📄</div>
+                        <span>Договоры</span>
+                    </a>
+                </div>
+                <div class="menu-item active">
+                    <a href="/search">
+                        <div class="menu-icon">🔍</div>
+                        <span>Поиск</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="/server">
+                        <div class="menu-icon">⚙️</div>
+                        <span>Сервер</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="/user">
+                        <div class="menu-icon">👤</div>
+                        <span>{{username}}</span>
+                    </a>
+                </div>
+            </nav>
+        </header>
+
+        <main class="content">
+            <div class="main-grid">
+                <section class="summary-section">
+                    <div class="section-header">
+                        <div class="header-icon">🔍</div>
+                        <h2>Параметры поиска</h2>
+                    </div>
+                    <form method="POST" action="/search" class="search_form">
+                        <div class="summary-card">
+                            <div class="card-content">
+                                <div class="search_field">
+                                    <label class="search_label">Номер договора</label>
+                                    <input type="text" name="contractNumber" class="search_input" placeholder="XXXXXX/XXXX">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="card-content">
+                                <div class="search_field">
+                                    <label class="search_label">ФИО</label>
+                                    <input type="text" name="fullName" class="search_input" placeholder="ФИО">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="summary-card">
+                            <div class="card-content">
+                                <div class="search_field">
+                                    <label class="search_label">Адрес подключения</label>
+                                    <input type="text" name="address" class="search_input" placeholder="Адрес">
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="action-button">Найти</button>
+                    </form>
+                </section>
+
+                <section class="notifications-section">
+                    <div class="section-header">
+                        <div class="header-icon">📋</div>
+                        <h2>Результаты поиска</h2>
+                    </div>
+
+                    {{#if contracts}}
+                    <div class="search-cards">
+                        {{#each contracts}}
+                        <a href="/contract?section=1&contract_number={{encodeURIComponent contract_number}}" 
+                           class="notification-card">
+                            <div class="card-icon">📄</div>
+                            <div class="notification-content">
+                                <p class="notification-text">{{contract_number}}</p>
+                                <div class="notification-details">
+                                    <span>{{full_name}}</span>
+                                    <span class="notification-address">{{connection_address}}</span>
+                                </div>
+                            </div>
+                        </a>
+                        {{/each}}
+                    </div>
+                    {{else}}
+                    <div class="empty-state">
+                        <p>Введите параметры поиска</p>
+                    </div>
+                    {{/if}}
+                </section>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

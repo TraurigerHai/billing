@@ -1,0 +1,1572 @@
+* {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
+}
+
+/* ...existing code... */
+
+body {
+    font-family: 'Inter';
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+}
+
+/* ...existing code... */
+
+.login-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.login-section {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-section .section-header {
+    margin-bottom: 32px;
+}
+
+.login-section .form-field {
+    margin-bottom: 24px;
+}
+
+.login-section .field-label {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.login-section .field-input {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: white;
+    transition: all 0.2s ease;
+}
+
+.login-section .field-input:focus {
+    border-color: #51ec73;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(81, 236, 115, 0.1);
+}
+
+.login-section .action-button {
+    width: 100%;
+    margin-top: 8px;
+}
+
+.login-section .error-message {
+    margin-top: 16px;
+    color: #ff4d4d;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* Remove old auth classes */
+.auth-content,
+.auth-section {
+    display: none;
+}
+
+/* ...existing code... */
+
+.main-container {
+    width: 100%;
+    margin: auto;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+}
+
+.header .logo {
+    width: 325px;
+    margin-top: 5px;
+}
+
+.header nav {
+    display: flex;
+    gap: 15px;
+}
+
+.header nav a {
+    text-decoration: none;
+    color: black;
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.header nav a:hover {
+    text-decoration: none;
+}
+
+/* Remove these unused styles */
+.header .nav_card,
+.header .active_nav_card,
+.header nav svg,
+.header .nav-item {
+    display: none;
+}
+
+/* Обновляем стили меню */
+.menu {
+    display: flex;
+    flex-direction: row;
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 8px;
+    gap: 8px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 20px;
+    width: auto;
+    z-index: 1000;
+}
+
+.menu-item {
+    position: relative;
+}
+
+.menu-item a {
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
+    text-decoration: none !important;  /* Убираем подчеркивание */
+    color: #666;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    min-width: 160px;
+    position: relative;
+    overflow: hidden;
+}
+
+.menu-item.active a {
+    color: #000;
+    background: #f8f8f8;
+    box-shadow: inset 0 0 0 1px #e0e0e0;
+}
+
+.menu-item:hover a {
+    color: #000;
+    transform: translateY(-1px);
+    background: #f8f8f8;
+}
+
+.menu-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    margin-right: 12px;
+    font-size: 24px;  /* Увеличиваем размер иконок */
+    transition: all 0.3s ease;
+}
+
+.menu-item span {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.menu-item:hover a {
+    color: #000;
+    transform: translateY(-1px);
+}
+
+.menu-item:hover .menu-icon {
+    transform: scale(1.1);
+}
+
+.menu-item.active a {
+    color: #000;
+}
+
+.menu-item.active .menu-icon {
+    transform: scale(1.1);
+}
+
+.menu-item:hover .menu-icon {
+    transform: scale(1.1);
+}
+
+/* Удаляем старые стили фона */
+.menu-item.active .menu-icon {
+    background: transparent;
+}
+
+.menu-item:hover .menu-icon {
+    background: transparent;
+}
+
+/* Удаляем ненужные стили */
+.menu-item:hover::after,
+.menu-item.active::after {
+    display: none;
+}
+
+/* Обновляем отступы контента */
+.content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    margin-left: 0;
+    padding: 100px 20px 20px 20px;
+    justify-content: center;
+    width: 100%;
+}
+
+.notifications,
+.summary {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.notifications {
+    min-width: 1200px;
+    margin-left: 0;
+    margin-right: 40px;
+    min-height: 700px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 60%;
+    min-width: 600px;
+    max-height: calc(100vh - 140px);
+    overflow-y: auto;
+}
+
+.notifications .top-note {
+    font-size: 48px;
+    margin-bottom: 50px;
+    font-weight: bold;
+}
+
+/* Remove unused classes */
+.notification-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    background-color: white;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    min-width: unset;
+    width: 100%;
+    height: 75px;
+    font-size: 24px;
+}
+
+.notification-type {
+    font-weight: bold;
+}
+
+.summary {
+    min-width: 500px;
+    min-height: 700px;
+    margin-left: 40px;
+    text-align: center;
+    width: 35%;
+    min-width: 400px;
+    max-height: calc(100vh - 140px);
+    overflow-y: auto;
+}
+
+.summary .top-note {
+    font-size: 48px;
+    margin-bottom: 50px;
+    font-weight: bold;
+}
+
+.summary .stats {
+    margin-bottom: 20px;
+}
+
+.summary .chart {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+/* Remove if not used in templates */
+.chart-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 14px;
+}
+
+.summary-item {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-left: 50px;
+    margin-bottom: 30px;
+}
+
+.summary-item span {
+    font-size: 24px;
+}
+
+.summary-item strong {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.network-status {
+    text-align: left;
+    margin-left: 50px;
+}
+
+.network-status .network-status-p {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.networks {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.network {
+    width: 150px;
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 30px;
+}
+
+.details-btn {
+    width: 250px;
+    height: 50px;
+    border-radius: 10px;
+    border: 1px solid #D6D6D6;
+    color: black;
+    background-color: white;
+    font-weight: bold;
+    font-size: 32px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.details-btn:hover {
+    background-color: #51ec73;
+}
+
+.contract_classes {
+    min-width: 700px;
+    margin-left: 70px;
+    margin-right: 40px;
+    min-height: 700px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.contract_info {
+    min-width: 1000px;
+    min-height: 700px;
+    max-height: 700px;
+    margin-left: 40px;
+    text-align: center;
+    overflow-y: auto;
+}
+
+.contract_classes,
+.contract_info {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Remove since active_contract_class is used instead */
+.contract_class {
+    width: 650px;
+    height: 50px;
+    font-size: 36px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-bottom: 33px;
+    background-color: #EDEDED;
+    border: 1px solid #D6D6D6;
+    color: #484848;
+    text-decoration: none;
+}
+
+.contract_class:hover {
+    background-color: white;
+    color: black;
+}
+
+.active_contract_class {
+    width: 650px;
+    height: 50px;
+    font-size: 36px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-bottom: 33px;
+    background-color: white;
+    border: 1px solid #D6D6D6;
+    color: black;
+}
+
+.contract_item {
+    display: flex;
+    flex-direction: row;
+    font-size: 24px;
+    margin-left: 50px;
+    margin-bottom: 10px;
+}
+
+.contract_item_input {
+    width: 300px;
+}
+
+/* Remove unused classes */
+.contract_item_date {
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+/* Remove unused classes */
+.contract_item_p {
+    margin-right: 30px;
+}
+
+.save-btn {
+    width: 250px;
+    height: 50px;
+    border-radius: 10px;
+    border: 1px solid #D6D6D6;
+    color: black;
+    background-color: white;
+    font-weight: bold;
+    font-size: 32px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+    cursor: pointer;
+}
+
+.save-btn:hover {
+    background-color: #51ec73;
+}
+
+/* Remove unused classes */
+.contract_item_div_balance {
+    display: flex;
+    align-items: center;
+}
+
+/* Remove unused classes */
+.contract_item_p_balance {
+    font-size: 32px;
+    text-align: left;
+    margin-left: 50px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+}
+
+/* Remove unused classes */
+.contract_item_input_balance {
+    font-size: 16px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.contract_item_input_balance:focus {
+    outline: none;
+    border-color: #51ec73;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Remove unused classes */
+.contract_item_btn_balance {
+    width: 150px;
+    height: 39px;
+    border-radius: 10px;
+    border: 1px solid #D6D6D6;
+    color: black;
+    background-color: white;
+    font-weight: bold;
+    font-size: 16px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.contract_item_btn_balance:hover {
+    background-color: #51ec73;
+}
+
+/* Remove unused classes */
+.contract_item_div_tariff {
+    display: flex;
+    align-items: center;
+}
+
+/* Remove unused classes */
+.contract_item_p_tariff {
+    font-size: 32px;
+    text-align: left;
+    margin-left: 50px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+}
+
+/* Remove unused classes */
+.contract_item_select_tariff {
+    font-size: 16px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.contract_item_select_tariff:focus {
+    outline: none;
+    border-color: #51ec73;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Remove unused classes */
+.contract_item_btn_tariff {
+    width: 150px;
+    height: 39px;
+    border-radius: 10px;
+    border: 1px solid #D6D6D6;
+    color: black;
+    background-color: white;
+    font-weight: bold;
+    font-size: 16px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.contract_item_btn_tariff:hover {
+    background-color: #51ec73;
+}
+
+.open_form {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+.open_form p {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.open_form .contract_item_input_balance {
+    margin: 0 auto;
+    margin-bottom: 40px;
+    width: 250px;
+}
+
+.btn_search {
+    width: 150px;
+    height: 39px;
+    border-radius: 10px;
+    border: 1px solid #D6D6D6;
+    color: black;
+    background-color: white;
+    font-weight: bold;
+    font-size: 16px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.btn_search:hover {
+    background-color: #51ec73;
+}
+
+/* Remove duplicate declarations */
+.top-search {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.search_results {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.search_results_header {
+    display: grid;
+    grid-template-columns: 1fr 2fr 3fr;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.search_result {
+    display: grid;
+    grid-template-columns: 1fr 2fr 3fr;
+    text-decoration: none;
+    font-size: 16px;
+    color: black;
+    background-color: #EDEDED;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.search_result:hover {
+    background-color: white;
+}
+
+.search_result div {
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.search_form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.search_label {
+    font-size: 18px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: black;
+}
+
+.search_input {
+    font-size: 16px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.search_input:focus {
+    outline: none;
+    border-color: #51ec73;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.search_button {
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+    background-color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.search_button:hover {
+    background-color: #51ec73;
+}
+
+/* Remove unused classes */
+.st_conn_div,
+.st_con_div,
+.st_con_div_min {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.st_con_div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.st_con_div_min {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border: 1px solid #D6D6D6;
+    background-color: white;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    height: auto;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 33px;
+}
+
+.tariff_header {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Remove unused classes */
+.tariff_plans {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Remove unused classes */
+.tariff_plan {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 33px;
+}
+
+/* Remove unused classes */
+.tariff_input {
+    flex: 1;
+    font-size: 14px;
+    padding: 5px 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+/* Remove unused classes */
+.tariff_button {
+    width: 250px;
+    height: 50px;
+    border-radius: 10px;
+    border: 1px solid #D6D6D6;
+    color: black;
+    background-color: white;
+    font-weight: bold;
+    font-size: 32px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.tariff_button:hover {
+    background-color: #51ec73;
+}
+
+/* Remove unused classes */
+.user_div {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Remove unused classes */
+.user_name {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Remove unused classes */
+.user_status {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 33px;
+}
+
+.users-header {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.users-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.user-item {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border: 1px solid #D6D6D6;
+    background-color: white;
+    color: black;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    height: auto;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 33px;
+}
+
+.user-actions button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.user-actions button:hover {
+    background-color: #cc0000;
+}
+
+/* Remove unused classes */
+.new-tariff-form-min {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.new-tariff-form {
+    margin-top: 50px;
+    display: flex;
+}
+
+/* ...existing code... */
+
+.main-grid {
+    display: grid;
+    grid-template-columns: 400px 1fr; /* Меняем порядок колонок */
+    gap: 24px;
+    padding: 24px;
+    max-width: 1440px;
+    margin: 0 auto;
+    margin-top: 80px;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.header-icon {
+    font-size: 24px;
+}
+
+.section-header h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+}
+
+.notifications-section, 
+.summary-section {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.notifications-section {
+    min-width: 400px; /* Уменьшаем минимальную ширину */
+    height: auto;
+    flex: 1;
+    overflow-y: auto; /* Добавляем прокрутку если контент не помещается */
+    padding-bottom: 24px; /* Добавляем отступ снизу */
+    padding: 20px;
+}
+
+.notification-card {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    border-radius: 12px;
+    background: #f8f8f8;
+    margin-bottom: 12px;
+    transition: transform 0.2s ease;
+}
+
+.notification-card:hover {
+    transform: translateY(-2px);
+    background: #f0f0f0;
+}
+
+.notification-icon {
+    font-size: 20px;
+    margin-right: 16px;
+}
+
+.notification-content {
+    flex: 1;
+}
+
+.notification-type {
+    font-size: 14px;
+    font-weight: 600;
+    color: #666;
+}
+
+.notification-text {
+    font-size: 16px;
+    margin: 4px 0;
+    color: #333;
+}
+
+.notification-time {
+    font-size: 12px;
+    color: #999;
+}
+
+.summary-cards {
+    display: grid;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.summary-card {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-radius: 12px;
+    background: #f8f8f8;
+    transition: transform 0.2s ease;
+}
+
+.summary-card:hover {
+    transform: translateY(-2px);
+    background: #f0f0f0;
+}
+
+.card-icon {
+    font-size: 24px;
+    margin-right: 16px;
+}
+
+.card-content {
+    flex: 1;
+}
+
+.card-content p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.card-content strong {
+    font-size: 24px;
+    color: #333;
+}
+
+.network-grid {
+    display: grid;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.network-card {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 16px;
+    padding: 16px;
+    border-radius: 12px;
+    background: #f8f8f8;
+    align-items: center;
+    transition: transform 0.2s ease;
+}
+
+.network-card:hover {
+    transform: translateY(-2px);
+    background: #f0f0f0;
+}
+
+.action-button {
+    display: inline-block;
+    padding: 12px 24px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    color: #333;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.action-button:hover {
+    background: #f0f0f0;
+    transform: translateY(-2px);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 48px;
+    color: #666;
+}
+
+/* ...existing code... */
+
+.contract-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-height: 500px; /* Match minimum height */
+}
+
+.form-card {
+    background: #f8f8f8;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+    height: auto; /* Заменяем flex: 1 на height: auto */
+}
+
+.contract_item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    gap: 12px;
+}
+
+.contract_item_input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.contract_item_input:focus {
+    border-color: #51ec73;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(81, 236, 115, 0.1);
+}
+
+.navigation-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.navigation-cards .summary-card {
+    text-decoration: none;
+    color: inherit;
+}
+
+.navigation-cards .summary-card.active {
+    background: #f0f0f0;
+    border: 1px solid #ddd;
+}
+
+.balance-section,
+.tariff-section {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    height: auto; /* Заменяем фиксированную высоту на auto */
+    min-height: fit-content;
+    padding-bottom: 24px;
+}
+
+.deposit-form {
+    display: flex;
+    gap: 12px;
+    padding: 20px;
+    background: #f8f8f8;
+    border-radius: 12px;
+}
+
+/* Ensure summary section matches height */
+.summary-section {
+    width: 400px;
+    position: sticky;
+    top: 100px; /* Отступ от верха страницы */
+    height: fit-content;
+    align-self: start;
+}
+
+/* ...existing code... */
+
+/* ...existing code... */
+
+.search_field {
+    margin-bottom: 20px;
+}
+
+.search_form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.search_results {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.search_results_header {
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr;
+    padding: 12px;
+    font-weight: 500;
+    color: #666;
+    border-bottom: 1px solid #eee;
+}
+
+.search_results .notification-card {
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr;
+    text-align: left;
+    text-decoration: none;
+    color: inherit;
+}
+
+.search_results .notification-card:hover {
+    transform: translateY(-2px);
+    background: #f0f0f0;
+}
+
+/* ...existing code... */
+
+/* ...existing code... */
+
+.search-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.search_field {
+    margin-bottom: 16px;
+}
+
+.search_field label {
+    display: block;
+    margin-bottom: 8px;
+    color: #666;
+    font-size: 14px;
+}
+
+.search_field .search_input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.search_field .search_input:focus {
+    border-color: #51ec73;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(81, 236, 115, 0.1);
+}
+
+.notification-details {
+    display: flex;
+    justify-content: space-between;
+    color: #666;
+    font-size: 14px;
+    margin-top: 4px;
+}
+
+.notification-address {
+    color: #999;
+    font-size: 12px;
+}
+
+/* Обновляем стили для карточек результатов */
+.notification-card {
+    text-decoration: none;
+    color: inherit;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 48px;
+    color: #666;
+    font-size: 16px;
+}
+
+/* ...existing code... */
+
+/* ...existing code... */
+
+.tariffs-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.tariff-card {
+    background: #f8f8f8;
+    border-radius: 12px;
+    padding: 12px;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr; /* Изменяем пропорции колонок */
+    gap: 8px;
+    transition: transform 0.2s ease;
+    margin-bottom: 8px;
+}
+
+.tariff-card:hover {
+    transform: translateY(-2px);
+    background: #f0f0f0;
+}
+
+.tariff-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.tariff-field label {
+    font-size: 11px;
+    margin-bottom: 2px;
+    color: #666;
+    font-weight: 500;
+}
+
+.tariff-input {
+    width: 100%;
+    padding: 6px;
+    font-size: 13px;
+    height: 32px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: white;
+}
+
+.tariff-input:focus {
+    outline: none;
+    border-color: #51ec73;
+    box-shadow: 0 0 0 2px rgba(81, 236, 115, 0.1);
+}
+
+.network-status {
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.network-signal {
+    font-family: monospace;
+    color: #666;
+}
+
+/* ...existing code... */
+
+/* ...existing code... */
+
+.tariff-form {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr; /* Те же пропорции что и в tariff-card */
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+/* Обновляем стили для формы */
+.form-card {
+    background: #f8f8f8;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.form-card .section-header {
+    margin-bottom: 16px;
+}
+
+.form-card .action-button {
+    grid-column: span 4;
+    margin-top: 16px;
+}
+
+/* ...existing code... */
+
+/* ...existing code... */
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.info-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.info-label {
+    font-size: 14px;
+    color: #666;
+    min-width: 150px;
+}
+
+.info-value {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+}
+
+.users-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.user-card {
+    background: #f8f8f8;
+    border-radius: 12px;
+    padding: 16px;
+    transition: transform 0.2s ease;
+}
+
+.user-card:hover {
+    transform: translateY(-2px);
+    background: #f0f0f0;
+}
+
+.user-card .card-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.user-login {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+}
+
+.user-type {
+    font-size: 14px;
+    color: #666;
+}
+
+.delete-button {
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.delete-button:hover {
+    background: #cc0000;
+    transform: translateY(-1px);
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.field-label {
+    font-size: 14px;
+    color: #666;
+}
+
+.field-input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.field-input:focus {
+    outline: none;
+    border-color: #51ec73;
+    box-shadow: 0 0 0 2px rgba(81, 236, 115, 0.1);
+}
+
+/* ...existing code... */
+
+/* ...existing code... */
+
+.contract-grid {
+    display: grid;
+    gap: 24px;
+}
+
+.contract-section {
+    background: white;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.section-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #666;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+}
+
+.contract_item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 12px;
+}
+
+.contract_item label {
+    font-size: 13px;
+    color: #666;
+    min-width: 120px;
+}
+
+.contract_item input,
+.contract_item select {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    background: #f8f8f8;
+    transition: all 0.2s ease;
+}
+
+.contract_item input:focus,
+.contract_item select:focus {
+    border-color: #51ec73;
+    outline: none;
+    background: white;
+    box-shadow: 0 0 0 2px rgba(81, 236, 115, 0.1);
+}
+
+.contract_item input:read-only {
+    background: #eee;
+    cursor: not-allowed;
+}
+
+/* ...existing code... */
+
+.contract-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.contract_item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.contract_item label {
+    font-size: 14px;
+    color: #666;
+    min-width: 180px;
+}
+
+.contract_item input,
+.contract_item select {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    background: white;
+    transition: all 0.2s ease;
+}
+
+.contract_item input:focus,
+.contract_item select:focus {
+    border-color: #51ec73;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(81, 236, 115, 0.1);
+}
+
+.contract_item input:read-only {
+    background: #f8f8f8;
+    cursor: not-allowed;
+}

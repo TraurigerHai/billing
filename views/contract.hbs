@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <link type="image/x-icon" href="/img/favicon.svg" rel="shortcut icon">
+    <link type="Image/x-icon" href="/img/favicon.svg" rel="icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+    <title>Новый</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+</head>
+
+<body>
+    <div class="main-container">
+        <header class="header">
+            <nav class="menu">
+                <div class="menu-item">
+                    <a href="/main">
+                        <div class="menu-icon">⌂</div>
+                        <span>Главная</span>
+                    </a>
+                </div>
+                <div class="menu-item active">
+                    <a href="/contract">
+                        <div class="menu-icon">📄</div>
+                        <span>Договоры</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="/search">
+                        <div class="menu-icon">🔍</div>
+                        <span>Поиск</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="/server">
+                        <div class="menu-icon">⚙️</div>
+                        <span>Сервер</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="/user">
+                        <div class="menu-icon">👤</div>
+                        <span>{{username}}</span>
+                    </a>
+                </div>
+            </nav>
+        </header>
+
+        <main class="content">
+            <div class="main-grid">
+                <section class="summary-section">
+                    <div class="section-header">
+                        <div class="header-icon">📋</div>
+                        <h2>Навигация</h2>
+                    </div>
+                    <div class="navigation-cards">
+                        <a href="/contract?section=1{{#if contractNumber}}&contract_number={{encodeURIComponent contractNumber}}{{/if}}" 
+                           class="summary-card {{#if (eq activeSection '1')}}active{{/if}}">
+                            <div class="card-icon">📄</div>
+                            <div class="card-content">
+                                <p>Параметры договора</p>
+                            </div>
+                        </a>
+                        {{#if contractNumber}}
+                        <a href="/contract?section=2&contract_number={{encodeURIComponent contractNumber}}" 
+                           class="summary-card {{#if (eq activeSection '2')}}active{{/if}}">
+                            <div class="card-icon">💰</div>
+                            <div class="card-content">
+                                <p>Баланс</p>
+                            </div>
+                        </a>
+                        <a href="/contract?section=3&contract_number={{encodeURIComponent contractNumber}}" 
+                           class="summary-card {{#if (eq activeSection '3')}}active{{/if}}">
+                            <div class="card-icon">📊</div>
+                            <div class="card-content">
+                                <p>Тарифный план</p>
+                            </div>
+                        </a>
+                        {{/if}}
+                    </div>
+                </section>
+
+                <section class="notifications-section">
+                    {{#if (eq activeSection '1')}}
+                    <div class="section-header">
+                        <div class="card-icon">📄</div>
+                        <h2>Параметры договора</h2>
+                    </div>
+                    <div class="form-card">
+                        <form method="POST" action="/save" class="contract-form">
+                            <div class="contract_item">
+                                <label>Номер договора:</label>
+                                <input name="contract_number" value="{{contractNumber}}" readonly>
+                            </div>
+                            <div class="contract_item">
+                                <label>ФИО:</label>
+                                <input name="full_name" value="{{full_name}}">
+                            </div>
+                            <div class="contract_item">
+                                <label>Телефон:</label>
+                                <input name="phone" value="{{phone}}" class="masked-phone">
+                            </div>
+                            <div class="contract_item">
+                                <label>Адрес подключения:</label>
+                                <input name="connection_address" value="{{connection_address}}">
+                            </div>
+                            <div class="contract_item">
+                                <label>Адрес регистрации:</label>
+                                <input name="registration_address" value="{{registration_address}}">
+                            </div>
+                            <div class="contract_item">
+                                <label>Тип документа:</label>
+                                <input name="document_type" value="{{document_type}}">
+                            </div>
+                            <div class="contract_item">
+                                <label>Серия:</label>
+                                <input name="document_series" value="{{document_series}}" class="masked-series">
+                            </div>
+                            <div class="contract_item">
+                                <label>Номер:</label>
+                                <input name="document_number" value="{{document_number}}" class="masked-number">
+                            </div>
+                            <div class="contract_item">
+                                <label>Кем выдан:</label>
+                                <input name="issued_by" value="{{issued_by}}">
+                            </div>
+                            <div class="contract_item">
+                                <label>Дата выдачи:</label>
+                                <input name="issue_date" value="{{issue_date}}" class="masked-date">
+                            </div>
+                            <div class="contract_item">
+                                <label>Дата рождения:</label>
+                                <input name="birth_date" value="{{birth_date}}" class="masked-date">
+                            </div>
+                            <div class="contract_item">
+                                <label>Статус договора:</label>
+                                <select name="contract_status">
+                                    <option value="Ожидает подключения" {{#if (eq contract_status "Ожидает подключения")}}selected{{/if}}>Ожидает подключения</option>
+                                    <option value="Активный" {{#if (eq contract_status "Активный")}}selected{{/if}}>Активный</option>
+                                    <option value="Приостановлен" {{#if (eq contract_status "Приостановлен")}}selected{{/if}}>Приостановлен</option>
+                                </select>
+                            </div>
+                            <div class="contract_item">
+                                <label>Дата оформления:</label>
+                                <input name="contract_date" value="{{contract_date}}" class="masked-date">
+                            </div>
+                            <div class="contract_item">
+                                <label>Дата подключения:</label>
+                                <input name="actual_connection_date" value="{{actual_connection_date}}" class="masked-date">
+                            </div>
+                            <button type="submit" class="action-button">Сохранить</button>
+                        </form>
+                    </div>
+                    {{/if}}
+
+                    {{#if (eq activeSection '2')}}
+                    <div class="section-header">
+                        <div class="card-icon">💰</div>
+                        <h2>Управление балансом</h2>
+                    </div>
+                    <div class="balance-section">
+                        <div class="summary-card">
+                            <div class="card-icon">💰</div>
+                            <div class="card-content">
+                                <p>Текущий баланс</p>
+                                <strong>{{balance}} ₽</strong>
+                            </div>
+                        </div>
+                        
+                        <div class="form-card">
+                            <form method="POST" action="/contract" class="deposit-form">
+                                <input type="number" name="deposit_amount" class="search_input" placeholder="Введите сумму" min="0.01" step="0.01">
+                                <input type="hidden" name="contract_number" value="{{contractNumber}}">
+                                <button type="submit" class="action-button">Внести</button>
+                            </form>
+                        </div>
+                    </div>
+                    {{/if}}
+
+                    {{#if (eq activeSection '3')}}
+                    <div class="section-header">
+                        <div class="card-icon">📊</div>
+                        <h2>Управление тарифом</h2>
+                    </div>
+                    <div class="tariff-section">
+                        <div class="form-card">
+                            <form method="POST" action="/update-tariff">
+                                <select name="tariff_id" class="field-input">
+                                    {{#each tariffPlans}}
+                                    <option value="{{id}}" {{#if (eq ../currentTariffId id)}}selected{{/if}}>
+                                        {{name}} - {{price}} ₽/мес
+                                    </option>
+                                    {{/each}}
+                                </select>
+                                <input type="hidden" name="contract_number" value="{{contractNumber}}">
+                                <button type="submit" class="action-button">Сохранить</button>
+                            </form>
+                        </div>
+                    </div>
+                    {{/if}}
+                </section>
+            </div>
+        </main>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('.masked-phone').mask('+70000000000');
+            $('.masked-series').mask('0000');
+            $('.masked-number').mask('000000');
+            $('.masked-date').mask('00.00.0000', {
+                placeholder: "ДД.ММ.ГГГГ"
+            });
+        });
+    </script>
+</body>
+
+</html>
